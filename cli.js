@@ -2,7 +2,7 @@
 
 import fs from 'fs';
 import path from 'path';
-import { sortImports } from './sort.js';
+import sortImports from './sort.js';
 
 const args = process.argv.slice(2);
 const filePath = args.find(arg => !arg.startsWith('-'));
