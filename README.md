@@ -6,13 +6,13 @@ A simple script to sort Javascript imports the way I want
 
 ### Order
 
-1. No names
+1. No names  
   `import "module"`
-2. Everything
+2. Everything  
   `import * from "module"`
-3. Defaults
+3. Defaults  
   `import a from "module"`
-4. Named
+4. Named  
   `import { a, b } from "module"`
 
 ### Sorting
@@ -52,4 +52,10 @@ import {
   en,
   fr
 } from "vuetify/locale"
+```
+
+## Usage
+
+```bash
+npx js-imports-sort <file>
 ```

@@ -1,0 +1,67 @@
+{
+  "author": "EDM115 <dev@edm115.eu.org> (https://edm115.dev)",
+  "bugs": {
+    "email": "js-imports-sort@edm115.eu.org",
+    "url": "https://github.com/EDM115/js-imports-sort/issues"
+  },
+  "description": "A simple script to sort Javascript imports the way I want",
+  "devDependencies": {
+    "@babel/core": "7.24.5",
+    "@babel/preset-env": "7.24.5",
+    "@rollup/plugin-babel": "6.0.4",
+    "@rollup/plugin-commonjs": "25.0.7",
+    "@rollup/plugin-node-resolve": "15.2.3",
+    "cross-env": "7.0.3",
+    "rimraf": "5.0.5",
+    "rollup": "4.17.2",
+    "rollup-plugin-visualizer": "5.12.0"
+  },
+  "files": [
+    "/dist",
+    "/package.json",
+    "/README.md"
+  ],
+  "funding": [
+    {
+      "type": "paypal",
+      "url": "https://www.paypal.me/8EDM115"
+    },
+    {
+      "type": "buymeacoffee",
+      "url": "https://www.buymeacoffee.com/edm115"
+    },
+    {
+      "type": "crypto",
+      "url": "https://walad.link/edm115"
+    },
+    {
+      "type": "github",
+      "url": "https://github.com/sponsors/EDM115"
+    },
+    {
+      "type": "telegram",
+      "url": "https://t.me/EDM115bots/698"
+    }
+  ],
+  "homepage": "https://github.com/EDM115/js-imports-sort",
+  "keywords": [
+    "import",
+    "js",
+    "sort"
+  ],
+  "license": "MIT",
+  "main": "dist/js-imports-sort.cjs",
+  "module": "dist/js-imports-sort.js",
+  "name": "js-imports-sort",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EDM115/js-imports-sort.git"
+  },
+  "scripts": {
+    "build": "rimraf dist && rollup -c",
+    "publish:github": "npm publish --registry https://npm.pkg.github.com/",
+    "publish:npm": "npm publish --registry https://registry.npmjs.org/"
+  },
+  "type": "module",
+  "version": "1.0.0"
+}

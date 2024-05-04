@@ -1,9 +1,11 @@
-export default function sortImports(code) {
+'use strict';
+
+function sortImports(code) {
   // Regular expression to capture complete import statements, including multiline
-  const importRegex = /import\s+(?:(\*\s+from\s+['"][^'"]+['"])|(['"][^'"]+['"])|(\w+\s*,?\s*\{[\w\s,]*\}\s*from\s*['"][^'"]+['"])|(\w+\s+from\s*['"][^'"]+['"])|(\{[\w\s,]*\}\s*from\s*['"][^'"]+['"]))/gs;
+  var importRegex = /import\s+(?:(\*\s+from\s+['"][^'"]+['"])|(['"][^'"]+['"])|(\w+\s*,?\s*\{[\w\s,]*\}\s*from\s*['"][^'"]+['"])|(\w+\s+from\s*['"][^'"]+['"])|(\{[\w\s,]*\}\s*from\s*['"][^'"]+['"]))/g;
 
   // Function to get import order based on type
-  const getOrder = (imp) => {
+  var getOrder = function getOrder(imp) {
     // No names
     if (imp.match(/^import\s+['"]/)) {
       return 1;
@@ -26,19 +28,22 @@ export default function sortImports(code) {
   };
 
   // Normalize and prepare imports for sorting
-  const normalizeImport = (imp) => {
-    const fromMatch = imp.match(/from\s+['"]([^'"]+)['"]/);
-    const source = fromMatch ? fromMatch[1] : '';
+  var normalizeImport = function normalizeImport(imp) {
+    var fromMatch = imp.match(/from\s+['"]([^'"]+)['"]/);
+    var source = fromMatch ? fromMatch[1] : '';
     // Remove the 'from' part to isolate what's imported
-    const imported = imp.replace(/from\s+['"][^'"]+['"]/, '');
-
-    return { original: imp, source, imported, order: getOrder(imp) };
+    var imported = imp.replace(/from\s+['"][^'"]+['"]/, '');
+    return {
+      original: imp,
+      source: source,
+      imported: imported,
+      order: getOrder(imp)
+    };
   };
 
   // Extract all import statements from the code
-  let match;
-  const imports = [];
-
+  var match;
+  var imports = [];
   while ((match = importRegex.exec(code)) !== null) {
     imports.push(normalizeImport(match[0]));
   }
@@ -46,9 +51,9 @@ export default function sortImports(code) {
   // Custom comparison function for sorting imports
   function customCompare(a, b) {
     // Regular expression to extract leading characters that are not alphanumeric (special characters)
-    const regex = /^[\W_]+/;
-    const specialA = (a.match(regex) || [''])[0];
-    const specialB = (b.match(regex) || [''])[0];
+    var regex = /^[\W_]+/;
+    var specialA = (a.match(regex) || [''])[0];
+    var specialB = (b.match(regex) || [''])[0];
 
     // Compare special characters by their Unicode values
     if (specialA !== specialB) {
@@ -64,35 +69,35 @@ export default function sortImports(code) {
       }
 
       // If not numeric, compare alphabetically with case sensitivity
-      return a.localeCompare(b, undefined, { numeric: true, caseFirst: "lower" });
+      return a.localeCompare(b, undefined, {
+        numeric: true,
+        caseFirst: "lower"
+      });
     }
-
     return 0;
   }
 
   // Sorting imports
-  imports.sort((a, b) => {
+  imports.sort(function (a, b) {
     // First by order type
     if (a.order !== b.order) {
       return a.order - b.order;
     }
-    
+
     // Then by source using custom compare function (we coule have used Intl.Collator, but our rules are more complex)
-    let compareResult = customCompare(a.source, b.source);
+    var compareResult = customCompare(a.source, b.source);
     if (compareResult !== 0) {
       return compareResult;
     }
-    
+
     // Lastly by what's imported using custom compare function
     return customCompare(a.imported, b.imported);
   });
 
-
   // Join sorted imports back to a single string with a blank line between types
-  let result = '';
-  let lastOrder = null;
-
-  imports.forEach((imp) => {
+  var result = '';
+  var lastOrder = null;
+  imports.forEach(function (imp) {
     if (lastOrder !== null && lastOrder !== imp.order) {
       // Add an extra newline to separate types
       result += '\n';
@@ -107,3 +112,5 @@ export default function sortImports(code) {
   // Trim to remove any extra newline at the end
   return result.trim();
 }
+
+module.exports = sortImports;
