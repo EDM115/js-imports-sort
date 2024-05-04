@@ -1,5 +1,8 @@
 {
   "author": "EDM115 <dev@edm115.eu.org> (https://edm115.dev)",
+  "bin": {
+    "js-imports-sort": "./cli.js"
+  },
   "bugs": {
     "email": "js-imports-sort@edm115.eu.org",
     "url": "https://github.com/EDM115/js-imports-sort/issues"
@@ -18,8 +21,10 @@
   },
   "files": [
     "/dist",
+    "/cli.js",
     "/package.json",
-    "/README.md"
+    "/README.md",
+    "/sort.js"
   ],
   "funding": [
     {
@@ -63,5 +68,5 @@
     "publish:npm": "npm publish --registry https://registry.npmjs.org/"
   },
   "type": "module",
-  "version": "1.0.0"
+  "version": "1.1.0"
 }

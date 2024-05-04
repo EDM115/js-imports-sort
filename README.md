@@ -56,6 +56,44 @@ import {
 
 ## Usage
 
+Install the package
+
 ```bash
-npx js-imports-sort <file>
+npm install js-imports-sort
 ```
+
+- In a javascript file
+
+```js
+import { sortImports } from "js-imports-sort"
+
+const code = `
+import { createVuetify } from "vuetify"
+import js from "@eslint/js"
+import vuetify, { transformAssetUrls } from "vite-plugin-vuetify"
+import * from "node:fs"
+import { defineNuxtPlugin } from "#app"
+import "vuetify/styles"
+import {
+  en,
+  fr
+} from "vuetify/locale"
+  import "@mdi/font/css/materialdesignicons.css"
+`
+
+const sortedCode = sortImports(code)
+console.log(sortedCode)
+```
+
+- In a shell
+
+```bash
+npx js-imports-sort <file> -r
+```
+
+Params available :
+- `-r` or `--replace` : Replace the file content with the sorted imports
+- `-o <path>` or `--output <path>` : Output the sorted imports in a different file. Have to be used with `-r`
+- `-l` or `--log` : Output the sorted imports in the console
+
+At least one of `-r` or `-l` has to be used
