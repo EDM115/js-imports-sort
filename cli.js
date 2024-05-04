@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const path = require('path');
-const { sortImports } = require('./index'); // adjust path as needed
+import fs from 'fs';
+import path from 'path';
+import { sortImports } from './sort.js';
 
 const args = process.argv.slice(2);
 const filePath = args.find(arg => !arg.startsWith('-'));

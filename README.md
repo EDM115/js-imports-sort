@@ -78,7 +78,7 @@ import {
   en,
   fr
 } from "vuetify/locale"
-  import "@mdi/font/css/materialdesignicons.css"
+import "@mdi/font/css/materialdesignicons.css"
 `
 
 const sortedCode = sortImports(code)
