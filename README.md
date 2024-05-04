@@ -6,7 +6,7 @@ A simple script to sort Javascript imports the way I want
 
 ### Order
 
-1. No names  
+1. No names (side-effect)  
   `import "module"`
 2. Everything  
   `import * from "module"`
@@ -27,12 +27,15 @@ A simple script to sort Javascript imports the way I want
 ## Features
 
 - Supports multiline imports
-- Sorts the imports from a module (ex : `import {z, b}, s, a from "c"` becomes `import a, s, {b, z} from "c"`)
 - Adds a newline between imports from different types
 
 ## Limitations
 
 - Doesn't work yet with `require()` syntax
+- Can't really sort the imports from a module (ex : `import {z, b}, s, a from "c"` becomes `import a, s, {b, z} from "c"`), due to how it perceives mixed imports
+- Doesn't support semicolons at the end of the import
+- Doesn't support comments
+- Doesn't deduplicate imports
 - ESLint plugin not yet implemented
 
 ## Example
@@ -65,7 +68,7 @@ npm install js-imports-sort
 - In a javascript file
 
 ```js
-import { sortImports } from "js-imports-sort"
+import sortImports from "js-imports-sort"
 
 const code = `
 import { createVuetify } from "vuetify"
@@ -88,7 +91,7 @@ console.log(sortedCode)
 - In a shell
 
 ```bash
-npx js-imports-sort <file> -r
+npx js-imports-sort@latest <file> -r
 ```
 
 Params available :

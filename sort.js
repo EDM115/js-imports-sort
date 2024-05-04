@@ -45,25 +45,28 @@ export default function sortImports(code) {
 
   // Custom comparison function for sorting imports
   function customCompare(a, b) {
-    // Regular expression to extract leading characters that are not alphanumeric (special characters)
-    const regex = /^[\W_]+/;
+    // Extract the leading special characters or first characters if not special
+    const regex = /^[\W_]+|^\w/;
     const specialA = (a.match(regex) || [''])[0];
     const specialB = (b.match(regex) || [''])[0];
 
-    // Compare special characters by their Unicode values
+    // Convert to ASCII values and compare
     if (specialA !== specialB) {
-      return specialA < specialB ? -1 : 1;
+      if (specialA.match(/[\W_]/) && specialB.match(/[\W_]/)) {
+        return specialA.charCodeAt(0) - specialB.charCodeAt(0);
+      }
+
+      return (specialA.match(/[\W_]/) ? -1 : 1);
     }
 
-    // If special characters are the same, compare the entire string
-    // Here we need to sort numerically if possible and consider case sensitivity
+    // If special characters are the same or absent, check full comparison including numerics and case sensitivity
     if (a !== b) {
       // Check if both strings are purely numeric
       if (!isNaN(Number(a)) && !isNaN(Number(b))) {
         return Number(a) - Number(b);
       }
 
-      // If not numeric, compare alphabetically with case sensitivity
+      // Compare alphabetically with sensitivity to case and numeric values
       return a.localeCompare(b, undefined, { numeric: true, caseFirst: "lower" });
     }
 
@@ -100,7 +103,6 @@ export default function sortImports(code) {
 
     // Add the current import line
     result += imp.original + '\n';
-    // Update last order to current
     lastOrder = imp.order;
   });
 
