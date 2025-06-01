@@ -14,6 +14,9 @@ importers:
       '@eslint/js':
         specifier: ~9.28.0
         version: 9.28.0
+      '@oxc-project/runtime':
+        specifier: ~0.72.2
+        version: 0.72.2
       '@stylistic/eslint-plugin':
         specifier: ~4.4.0
         version: 4.4.0(eslint@9.28.0(jiti@2.4.2))(typescript@5.8.3)
@@ -354,6 +357,10 @@ packages:
 
   '@oxc-project/runtime@0.72.1':
     resolution: {integrity: sha512-8nU/WPeJWF6QJrT8HtEEIojz26bXn677deDX8BDVpjcz97CVKORVAvFhE2/lfjnBYE0+aqmjFeD17YnJQpCyqg==}
+    engines: {node: '>=6.9.0'}
+
+  '@oxc-project/runtime@0.72.2':
+    resolution: {integrity: sha512-J2lsPDen2mFs3cOA1gIBd0wsHEhum2vTnuKIRwmj3HJJcIz/XgeNdzvgSOioIXOJgURIpcDaK05jwaDG1rhDwg==}
     engines: {node: '>=6.9.0'}
 
   '@oxc-project/types@0.72.1':
@@ -1829,6 +1836,8 @@ snapshots:
       fastq: 1.19.1
 
   '@oxc-project/runtime@0.72.1': {}
+
+  '@oxc-project/runtime@0.72.2': {}
 
   '@oxc-project/types@0.72.1': {}
 
