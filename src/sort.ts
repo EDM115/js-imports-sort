@@ -1,4 +1,4 @@
-export default function sortImports(code: string): string {
+function sortImports(code: string): string {
   // Regular expression to capture complete import statements, including multiline
   const importRegex
     = /import\s+(?:(\*\s+from\s+['"][^'"]+['"])|(['"][^'"]+['"])|(\w+\s*,?\s*\{[\w\s,]*\}\s*from\s*['"][^'"]+['"])|(\w+\s+from\s*['"][^'"]+['"])|(\{[\w\s,]*\}\s*from\s*['"][^'"]+['"]))/gs
@@ -119,3 +119,5 @@ export default function sortImports(code: string): string {
   // Trim to remove any extra newline at the end
   return result.trim()
 }
+
+export default sortImports
