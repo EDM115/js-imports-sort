@@ -72,7 +72,6 @@
   },
   "scripts": {
     "build": "tsdown",
-    "dev": "tsdown --watch",
 
     "lint": "run-s lint:oxlint lint:eslint",
     "lint:fix": "run-s lint:fix:oxlint lint:fix:eslint",
