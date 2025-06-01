@@ -1,7 +1,7 @@
 export default function sortImports(code) {
   // Regular expression to capture complete import statements, including multiline
-  const importRegex =
-    /import\s+(?:(\*\s+from\s+['"][^'"]+['"])|(['"][^'"]+['"])|(\w+\s*,?\s*\{[\w\s,]*\}\s*from\s*['"][^'"]+['"])|(\w+\s+from\s*['"][^'"]+['"])|(\{[\w\s,]*\}\s*from\s*['"][^'"]+['"]))/gs
+  const importRegex
+    = /import\s+(?:(\*\s+from\s+['"][^'"]+['"])|(['"][^'"]+['"])|(\w+\s*,?\s*\{[\w\s,]*\}\s*from\s*['"][^'"]+['"])|(\w+\s+from\s*['"][^'"]+['"])|(\{[\w\s,]*\}\s*from\s*['"][^'"]+['"]))/gs
 
   // Function to get import order based on type
   const getOrder = (imp) => {
@@ -48,8 +48,8 @@ export default function sortImports(code) {
   function customCompare(a, b) {
     // Extract the leading special characters or first characters if not special
     const regex = /^[\W_]+|^\w/
-    const specialA = (a.match(regex) || [""])[0]
-    const specialB = (b.match(regex) || [""])[0]
+    const specialA = (a.match(regex) || [ "" ])[0]
+    const specialB = (b.match(regex) || [ "" ])[0]
 
     // Convert to ASCII values and compare
     if (specialA !== specialB) {
@@ -70,7 +70,7 @@ export default function sortImports(code) {
       // Compare alphabetically with sensitivity to case and numeric values
       return a.localeCompare(b, undefined, {
         numeric: true,
-        caseFirst: "lower"
+        caseFirst: "lower",
       })
     }
 
@@ -85,7 +85,8 @@ export default function sortImports(code) {
     }
 
     // Then by source using custom compare function (we coule have used Intl.Collator, but our rules are more complex)
-    let compareResult = customCompare(a.source, b.source)
+    const compareResult = customCompare(a.source, b.source)
+
     if (compareResult !== 0) {
       return compareResult
     }
@@ -105,7 +106,7 @@ export default function sortImports(code) {
     }
 
     // Add the current import line
-    result += imp.original + "\n"
+    result += `${imp.original}\n`
     lastOrder = imp.order
   })
 

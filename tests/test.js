@@ -1,4 +1,4 @@
-import sortImports from "./sort.js"
+import sortImports from "../src/sort.js"
 
 const code = `
 import { createVuetify } from "vuetify";
@@ -21,6 +21,7 @@ for (let i = 0; i < 10; i++) {
 `
 
 const sortedCode = sortImports(code)
+
 console.log(sortedCode)
 
 console.log("\n---\n")
@@ -41,6 +42,7 @@ import {z, b}, s, a from "c"
 `
 
 const sortedCode2 = sortImports(code2)
+
 console.log(sortedCode2)
 
 console.log("\n---\n")

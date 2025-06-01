@@ -17,9 +17,7 @@ if (!filePath) {
 }
 
 if (!logFlag && !replaceFlag && !outputPath) {
-  console.error(
-    "Please provide at least one option: -l/--log, -r/--replace, or -o/--output with -r"
-  )
+  console.error("Please provide at least one option: -l/--log, -r/--replace, or -o/--output with -r")
   process.exit(1)
 }
 
@@ -47,9 +45,10 @@ fs.readFile(fullPath, "utf8", (err, data) => {
 
   if (replaceFlag) {
     const writePath = fullOutputPath || fullPath
-    fs.writeFile(writePath, sortedCode, "utf8", (err) => {
-      if (err) {
-        console.error(`Error writing file: ${err.message}`)
+
+    fs.writeFile(writePath, sortedCode, "utf8", (err2) => {
+      if (err2) {
+        console.error(`Error writing file: ${err2.message}`)
         process.exit(1)
       }
       console.log(`File sorted and saved to ${writePath}`)
