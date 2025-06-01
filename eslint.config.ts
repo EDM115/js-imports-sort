@@ -26,9 +26,9 @@ export default [
       globals: {
         ...globals.node,
       },
+      parser: tsParser,
       parserOptions: {
         ecmaVersion: "latest",
-        parser: tsParser,
         tsconfigRootDir: import.meta.dirname,
       },
     },

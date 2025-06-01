@@ -1,15 +1,17 @@
 {
-  "author": "EDM115 <dev@edm115.eu.org> (https://edm115.dev)",
+  "author": "EDM115 <npmjs@edm115.dev> (https://edm115.dev)",
   "bin": {
-    "js-imports-sort": "./cli.js"
+    "js-imports-sort": "./dist/cli.js"
   },
   "bugs": {
-    "email": "js-imports-sort@edm115.eu.org",
+    "email": "npmjs@edm115.dev",
     "url": "https://github.com/EDM115/js-imports-sort/issues"
   },
   "description": "A simple script to sort Javascript imports the way I want",
   "devDependencies": {
+    "@arethetypeswrong/core": "~0.18.1",
     "@eslint/js": "~9.28.0",
+    "@oxc-project/runtime": "~0.72.2",
     "@stylistic/eslint-plugin": "~4.4.0",
     "@types/node": "latest",
     "@typescript-eslint/parser": "~8.33.0",
@@ -25,10 +27,18 @@
     "tsx": "~4.19.4",
     "typescript": "~5.8.3",
     "typescript-eslint": "~8.33.0",
+    "unplugin-unused": "~0.5.0",
     "vitest": "~3.1.4"
   },
   "exports": {
-    ".": "./dist/js-imports-sort.js",
+    "./cli": {
+      "import": "./dist/cli.js",
+      "require": "./dist/cli.cjs"
+    },
+    "./main": {
+      "import": "./dist/main.js",
+      "require": "./dist/main.cjs"
+    },
     "./package.json": "./package.json"
   },
   "files": [
@@ -59,8 +69,8 @@
     "sort"
   ],
   "license": "MIT",
-  "main": "./dist/js-imports-sort.js",
-  "module": "./dist/js-imports-sort.js",
+  "main": "./dist/main.js",
+  "module": "./dist/main.js",
   "name": "js-imports-sort",
   "packageManager": "pnpm@10.11.0",
   "publishConfig": {
@@ -72,28 +82,20 @@
   },
   "scripts": {
     "build": "tsdown",
-
     "lint": "run-s lint:oxlint lint:eslint",
     "lint:fix": "run-s lint:fix:oxlint lint:fix:eslint",
-
     "lint:eslint": "eslint . --cache --cache-location .eslintcache",
     "lint:fix:eslint": "eslint . --fix",
-
     "lint:oxlint": "oxlint . --ignore-path .gitignore",
     "lint:fix:oxlint": "oxlint . --fix --ignore-path .gitignore",
-
     "lint:no-cache:eslint": "eslint .",
-
     "format": "eslint -c eslint.stylistic.config.ts --fix .",
-
     "prepublishOnly": "pnpm build",
     "release": "pnpm publish",
-
     "test": "vitest",
-
     "typecheck": "tsc --noEmit"
   },
   "type": "module",
-  "types": "./dist/js-imports-sort.d.ts",
+  "types": "./dist/main.d.ts",
   "version": "1.2.0"
 }

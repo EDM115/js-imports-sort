@@ -1,4 +1,4 @@
-export default function sortImports(code: string) {
+export default function sortImports(code: string): string {
   // Regular expression to capture complete import statements, including multiline
   const importRegex
     = /import\s+(?:(\*\s+from\s+['"][^'"]+['"])|(['"][^'"]+['"])|(\w+\s*,?\s*\{[\w\s,]*\}\s*from\s*['"][^'"]+['"])|(\w+\s+from\s*['"][^'"]+['"])|(\{[\w\s,]*\}\s*from\s*['"][^'"]+['"]))/gs
@@ -51,8 +51,8 @@ export default function sortImports(code: string) {
   function customCompare(a: string, b: string) {
     // Extract the leading special characters or first characters if not special
     const regex = /^[\W_]+|^\w/
-    const specialA = (a.match(regex) || [ "" ])[0]
-    const specialB = (b.match(regex) || [ "" ])[0]
+    const [specialA = ""] = a.match(regex) || []
+    const [specialB = ""] = b.match(regex) || []
 
     // Convert to ASCII values and compare
     if (specialA !== specialB) {
@@ -85,7 +85,7 @@ export default function sortImports(code: string) {
     // First by order type with null safety
     const orderA = a.order ?? 5
     const orderB = b.order ?? 5
-    
+
     if (orderA !== orderB) {
       return orderA - orderB
     }
@@ -103,7 +103,7 @@ export default function sortImports(code: string) {
 
   // Join sorted imports back to a single string with a blank line between types
   let result = ""
-  let lastOrder: number | undefined = undefined
+  let lastOrder: number | undefined
 
   imports.forEach((imp) => {
     if (lastOrder !== undefined && lastOrder !== imp.order) {

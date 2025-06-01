@@ -1,9 +1,17 @@
 import { defineConfig } from "tsdown"
 
-export default defineConfig([
-  {
-    entry: [ "./src/cli.ts" ],
-    platform: "neutral",
-    dts: true,
+export default defineConfig({
+  // attw: true,
+  dts: true,
+  entry: {
+    cli: "./src/cli.ts",
+    main: "./src/sort.ts",
   },
-])
+  exports: true,
+  format: [ "cjs", "esm" ],
+  minify: true,
+  platform: "node",
+  shims: true,
+  target: [ "esnext", "node20" ],
+  unused: true,
+})
