@@ -1,4 +1,4 @@
-import sortImports from "../src/sort.js"
+import sortImports from "../src/sort"
 
 const code = `
 import { createVuetify } from "vuetify";

@@ -1,10 +1,10 @@
-export default function sortImports(code) {
+export default function sortImports(code: string) {
   // Regular expression to capture complete import statements, including multiline
   const importRegex
     = /import\s+(?:(\*\s+from\s+['"][^'"]+['"])|(['"][^'"]+['"])|(\w+\s*,?\s*\{[\w\s,]*\}\s*from\s*['"][^'"]+['"])|(\w+\s+from\s*['"][^'"]+['"])|(\{[\w\s,]*\}\s*from\s*['"][^'"]+['"]))/gs
 
   // Function to get import order based on type
-  const getOrder = (imp) => {
+  const getOrder = (imp: string) => {
     // No names
     if (imp.match(/^import\s+['"]/)) {
       return 1
@@ -24,10 +24,13 @@ export default function sortImports(code) {
     if (imp.match(/\{[\w\s,]*\}\s*from/)) {
       return 4
     }
+
+    // Default order for unknown patterns
+    return 5
   }
 
   // Normalize and prepare imports for sorting
-  const normalizeImport = (imp) => {
+  const normalizeImport = (imp: string) => {
     const fromMatch = imp.match(/from\s+['"]([^'"]+)['"]/)
     const source = fromMatch ? fromMatch[1] : ""
     // Remove the 'from' part to isolate what's imported
@@ -45,7 +48,7 @@ export default function sortImports(code) {
   }
 
   // Custom comparison function for sorting imports
-  function customCompare(a, b) {
+  function customCompare(a: string, b: string) {
     // Extract the leading special characters or first characters if not special
     const regex = /^[\W_]+|^\w/
     const specialA = (a.match(regex) || [ "" ])[0]
@@ -79,9 +82,12 @@ export default function sortImports(code) {
 
   // Sorting imports
   imports.sort((a, b) => {
-    // First by order type
-    if (a.order !== b.order) {
-      return a.order - b.order
+    // First by order type with null safety
+    const orderA = a.order ?? 5
+    const orderB = b.order ?? 5
+    
+    if (orderA !== orderB) {
+      return orderA - orderB
     }
 
     // Then by source using custom compare function (we coule have used Intl.Collator, but our rules are more complex)
@@ -97,10 +103,10 @@ export default function sortImports(code) {
 
   // Join sorted imports back to a single string with a blank line between types
   let result = ""
-  let lastOrder = null
+  let lastOrder: number | undefined = undefined
 
   imports.forEach((imp) => {
-    if (lastOrder !== null && lastOrder !== imp.order) {
+    if (lastOrder !== undefined && lastOrder !== imp.order) {
       // Add an extra newline to separate types
       result += "\n"
     }

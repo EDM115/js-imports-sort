@@ -87,7 +87,7 @@
 
     "format": "eslint -c eslint.stylistic.config.ts --fix .",
 
-    "prepublishOnly": "pnpm run build",
+    "prepublishOnly": "pnpm build",
     "release": "pnpm publish",
 
     "test": "vitest",

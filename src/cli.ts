@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
-import fs from "fs"
-import path from "path"
-import sortImports from "./sort.js"
+import fs from "node:fs"
+import path from "node:path"
+
+import sortImports from "./sort"
 
 const args = process.argv.slice(2)
 const filePath = args.find((arg) => !arg.startsWith("-"))
