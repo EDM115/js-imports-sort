@@ -9,12 +9,11 @@
   },
   "description": "A simple script to sort Javascript imports the way I want",
   "devDependencies": {
-    "@arethetypeswrong/core": "~0.18.1",
     "@eslint/js": "~9.28.0",
     "@oxc-project/runtime": "~0.72.2",
     "@stylistic/eslint-plugin": "~4.4.0",
     "@types/node": "latest",
-    "@typescript-eslint/parser": "~8.33.0",
+    "@typescript-eslint/parser": "~8.33.1",
     "eslint": "~9.28.0",
     "eslint-import-resolver-typescript": "~4.4.2",
     "eslint-plugin-import-x": "~4.15.0",
@@ -23,12 +22,12 @@
     "jiti": "~2.4.2",
     "npm-run-all2": "~8.0.4",
     "oxlint": "~0.17.0",
-    "tsdown": "~0.12.5",
+    "tsdown": "~0.12.6",
     "tsx": "~4.19.4",
     "typescript": "~5.8.3",
-    "typescript-eslint": "~8.33.0",
+    "typescript-eslint": "~8.33.1",
     "unplugin-unused": "~0.5.0",
-    "vitest": "~3.1.4"
+    "vitest": "~3.2.0"
   },
   "exports": {
     "./cli": {

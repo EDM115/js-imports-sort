@@ -1,7 +1,6 @@
 import { defineConfig } from "tsdown"
 
 export default defineConfig({
-  // attw: true,
   dts: true,
   entry: {
     cli: "./src/cli.ts",
