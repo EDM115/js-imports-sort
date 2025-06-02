@@ -72,7 +72,7 @@
   "main": "./dist/main.js",
   "module": "./dist/main.js",
   "name": "js-imports-sort",
-  "packageManager": "pnpm@10.11.0",
+  "packageManager": "pnpm@10.11.1",
   "publishConfig": {
     "access": "public"
   },
